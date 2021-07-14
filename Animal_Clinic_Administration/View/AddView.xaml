@@ -1,0 +1,522 @@
+﻿<UserControl x:Class="Animal_Clinic_Administration.UserControl2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Animal_Clinic_Administration"
+             mc:Ignorable="d" 
+              
+             d:DesignHeight="500" d:DesignWidth="900"
+             >
+
+
+
+     
+
+
+    <UserControl.Resources>
+
+         
+
+        <Style TargetType="DataGridColumnHeader" x:Key="asd">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Width" Value="auto"/>
+
+        </Style>
+        <Style TargetType="DataGridRowHeader" x:Key="sss">
+            <Setter Property="Width" Value="auto"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="ForLabel">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+
+            <Setter Property="VerticalAlignment" Value="Center"/>
+
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        
+        <Style x:Key="ForTextBox" TargetType="TextBox">
+
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true" >
+                    <Setter Property="Background" Value="red" />
+                    <Setter Property="Opacity" Value="0.1"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="7"/>
+            <Setter Property="Width" Value="100"/>
+
+
+
+        </Style>
+
+
+        <Style x:Key="ForTextBox2" TargetType="TextBox">
+  
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="7"/>
+            <Setter Property="Width" Value="100"/>
+ 
+        </Style>
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVis"/>
+
+        <Style  x:Key="ViewBoxForLabels" TargetType="Viewbox">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid>
+
+        
+        
+        <Grid.Background >
+
+            <ImageBrush ImageSource="vb.jpg" Opacity="0.8"/>
+
+
+
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.12*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+
+
+            <DataGrid Grid.Row="2" Grid.Column="0"   ItemsSource="{Binding Finded,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedPersonForUpdate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" CanUserAddRows="False"   RowHeaderStyle="{StaticResource sss}"     Visibility="{Binding PushDataGrid,Converter={StaticResource BooleanToVis}}" >
+
+                 
+                    
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Header="First Name"  Width="auto"    Binding="{Binding first_name }"/>
+
+                    <DataGridTextColumn  Header="Last Name"  Width="auto"   Binding="{Binding first_name }"/>
+
+                    <DataGridTextColumn Header="Age"   Width="auto"    Binding="{Binding age}"/>
+
+                    <DataGridTextColumn Header="Phone"      Width="auto"   Binding="{Binding phone}"/>
+
+                    <DataGridTextColumn Header="E-Mail"  Width="auto"     Binding="{Binding mail}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+             
+
+        </Grid>
+
+
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+
+
+
+            <Grid Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  />
+                    <ColumnDefinition  />
+                    <ColumnDefinition  />
+                    <ColumnDefinition/>
+                    <ColumnDefinition  />
+                </Grid.ColumnDefinitions>
+
+                <Button   Grid.Column="3" Content="Add" FontSize="20" FontWeight="Bold"    Command="{Binding AddPetsCommand}">
+                    <Button.Background >
+                        <SolidColorBrush Color="#50B2C0" Opacity="0.4"  />
+                    </Button.Background>
+                </Button>
+
+                <Button   Grid.Column="1" Content="Confirm" FontSize="20" FontWeight="Bold"    Command="{Binding ConfirmAddCommand}" Visibility="{Binding PushDataGrid,Converter={StaticResource BooleanToVis}}">
+                    <Button.Background >
+                        <SolidColorBrush Color="#50B2C0" Opacity="0.4"   />
+                    </Button.Background>
+                </Button>
+
+            </Grid>
+            
+
+
+        </Grid>
+
+
+
+
+        <!--Grid For Title-->
+
+
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.8*"/>
+                <ColumnDefinition  />
+                <ColumnDefinition  Width="2.8*"/>
+            
+            </Grid.ColumnDefinitions>
+
+             
+
+
+            <Viewbox  Grid.Column="0"  >
+                <Label   Content="Person Information" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="3">
+                <Label    Content="Animal Information" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="20" FontWeight="Bold"/>
+            </Viewbox>
+
+
+
+
+
+
+            <Button   Grid.Column="1"   Grid.Row="0" Content="Back" FontWeight="Bold"    Command="{Binding CloseRegisterMenuCommand}">
+                <Button.Background  >
+                    <SolidColorBrush Color="#50B2C0" Opacity="0.4"  />
+                </Button.Background>
+            </Button>
+
+
+
+
+
+
+
+        </Grid>
+
+
+
+
+
+
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+
+
+           
+             
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.7*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="1.15*"/>
+                <RowDefinition/>
+
+            </Grid.RowDefinitions>
+
+
+
+
+
+            <Viewbox  Grid.Row="1" Grid.Column="1" Style="{StaticResource ViewBoxForLabels}"  >
+                <Label      Content="First Name"   Style="{StaticResource ForLabel}"/>
+            </Viewbox>
+
+
+
+
+
+            <Viewbox  Grid.Row="2" Grid.Column="1" Style="{StaticResource ViewBoxForLabels}">
+                <Label    Content="Last Name" Style="{StaticResource ForLabel}"/>
+            </Viewbox>
+
+
+
+
+
+
+
+            <Viewbox Grid.Row="3" Grid.Column="1" Style="{StaticResource ViewBoxForLabels}">
+                <Label     Content="Age" Style="{StaticResource ForLabel}"/>
+            </Viewbox>
+
+
+
+
+
+
+            <Viewbox Grid.Row="4" Grid.Column="1" Style="{StaticResource ViewBoxForLabels}">
+                <Label   Content="Phone" Style="{StaticResource ForLabel}"/>
+            </Viewbox>
+
+
+            <Viewbox Grid.Row="5" Grid.Column="1" Style="{StaticResource ViewBoxForLabels}">
+                <Label  Content="Mail" Style="{StaticResource ForLabel}"/>
+
+            </Viewbox>
+
+
+
+
+            <Viewbox Grid.Row="1" Grid.Column="2">
+                <TextBox  Style="{StaticResource ForTextBox}"    Text="{Binding nFirstName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" ToolTip="{Binding ErrorCollection[nFirstName]}">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <Border Opacity="0" >
+                                <AdornedElementPlaceholder x:Name="controlWithError"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+                 
+
+
+            </Viewbox>
+
+
+
+            <Viewbox  Grid.Row="2" Grid.Column="2" >
+                <TextBox     Style="{StaticResource ForTextBox}"   Text="{Binding nLastName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" ToolTip="{Binding ErrorCollection[nLastName]}">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <Border Opacity="0" >
+                                <AdornedElementPlaceholder x:Name="controlWithError"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+            </Viewbox>
+
+
+
+
+            <Viewbox Grid.Row="3" Grid.Column="2">
+                <TextBox     Style="{StaticResource ForTextBox2}"  Text="{Binding nAge,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            </Viewbox>
+
+
+            <Viewbox Grid.Row="4" Grid.Column="2">
+                <TextBox     Style="{StaticResource ForTextBox}"    Text="{Binding nPhone,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" ToolTip="{Binding ErrorCollection[nPhone]}">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <Border Opacity="0" >
+                                <AdornedElementPlaceholder x:Name="controlWithError"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+            </Viewbox>
+
+
+
+            <Viewbox Grid.Row="5" Grid.Column="2">
+                <TextBox     Style="{StaticResource ForTextBox2}"  Text="{Binding nMail,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            </Viewbox>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </Grid>
+
+
+
+
+
+        <Grid Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition  />
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+
+            <Viewbox Grid.Row="1" Grid.Column="0" Style="{StaticResource ViewBoxForLabels}">
+                <Label    Content="Name"  Style="{StaticResource ForLabel}"    />
+            </Viewbox>
+
+
+
+
+            <Viewbox Grid.Row="2" Grid.Column="0" Style="{StaticResource ViewBoxForLabels}">
+                <Label     Content="Type"     Style="{StaticResource ForLabel}"/>
+            </Viewbox>
+
+
+
+
+
+            <Viewbox Grid.Row="3" Grid.Column="0" Style="{StaticResource ViewBoxForLabels}">
+                <Label    Content="Birth"    Style="{StaticResource ForLabel}"/>
+            </Viewbox>
+
+
+
+            <Viewbox Grid.Row="4" Grid.Column="0" Style="{StaticResource ViewBoxForLabels}">
+                <Label    Content="Passport"     Style="{StaticResource ForLabel}"/>
+            </Viewbox>
+
+
+
+
+
+
+            <Viewbox  Grid.Row="1" Grid.Column="1">
+                <TextBox     Style="{StaticResource ForTextBox}" 
+                             
+                             Text="{Binding pName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+                             
+                             ToolTip="{Binding ErrorCollection[pName]}">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <Border Opacity="0" >
+                                <AdornedElementPlaceholder x:Name="controlWithError"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+            </Viewbox>
+
+
+
+
+            <Viewbox Grid.Row="2" Grid.Column="1">
+
+                <TextBox    Style="{StaticResource ForTextBox}"  Text="{Binding pType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" ToolTip="{Binding ErrorCollection[pType]}">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <Border Opacity="0" >
+                                <AdornedElementPlaceholder x:Name="controlWithError"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+                 
+            </Viewbox>
+
+
+
+            <Viewbox Grid.Row="3" Grid.Column="1">
+
+                <TextBox    Style="{StaticResource ForTextBox2}"  Text="{Binding pBirth,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </Viewbox>
+
+
+            <Viewbox Grid.Row="4" Grid.Column="1">
+
+                <TextBox   Style="{StaticResource ForTextBox2}"   Text="{Binding pPassport,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+            </Viewbox>
+
+
+
+
+
+
+
+
+
+
+
+        </Grid>
+
+
+
+
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+
+
+            
+
+            
+        </Grid>
+
+
+
+
+
+
+    </Grid>
+</UserControl>
